@@ -2,9 +2,9 @@
 #      CHART OPTIONS (safe to change)
 #==================================================
 tags:
-  include-observability: false
-  include-log-streaming: false
-  include-request-tracing: false
+  include-observability: true
+  include-log-streaming: true
+  include-request-tracing: true
 
 #==================================================
 #      DEPENDENCY CONFIGURATIONS (danger zone)
