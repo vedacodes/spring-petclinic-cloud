@@ -47,6 +47,7 @@ grafana:
       enabled: true
   rbac:
     namespaced: true
+    pspEnabled: false
   fullnameOverride: "grafana"
   persistence:
     enabled : false
@@ -66,6 +67,8 @@ prometheus:
       enabled: false
   kubeStateMetrics:
     enabled: false
+    podSecurityPolicy:
+      enabled: false
   nodeExporter:
     enabled: false
   alertmanager:
@@ -75,6 +78,8 @@ prometheus:
 
 fluent-bit:
   fullnameOverride: fluentbit
+  podSecurityPolicy:
+    create: false
   config:
     customParsers: ""
 
