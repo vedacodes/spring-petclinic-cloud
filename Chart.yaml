@@ -53,7 +53,6 @@ keywords:
 - spring cloud
 - kubernetes
 - platform9
-kubeVersion: '>= 1.18.10'
 maintainers:
 - email: ddieruf@platform9.com
   name: David Dieruf

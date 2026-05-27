@@ -47,14 +47,14 @@ data:
           prometheus:
             enabled: true
 
-    customers-service-id: http://customers-service.spring-petclinic.svc.cluster.local:8080
-    visits-service-id: http://vists-service.spring-petclinic.svc.cluster.local:8080
+    customers-service-id: http://customers-service.{{ .Release.Namespace }}.svc.cluster.local:8080
+    visits-service-id: http://vists-service.{{ .Release.Namespace }}.svc.cluster.local:8080
 
     spring:
       boot:
         admin:
           client:
-            url: http://admin-server.spring-petclinic.svc.cluster.local:8080
+            url: http://admin-server.{{ .Release.Namespace }}.svc.cluster.local:8080
       datasource:
         schema: classpath*:db/mysql/schema.sql
         data: classpath*:db/mysql/data.sql
@@ -76,7 +76,7 @@ data:
       messages:
         basename: messages/messages
       zipkin:
-        base-url: http://zipkin-collector.spring-petclinic.svc.cluster.local:9411
+        base-url: http://zipkin-collector.{{ .Release.Namespace }}.svc.cluster.local:9411
       cloud:
         kubernetes:
           discovery:
@@ -94,19 +94,19 @@ data:
             proto-append: false
           routes:
             - id: vets-service
-              uri: http://vets-service.spring-petclinic.svc.cluster.local:8080
+              uri: http://vets-service.{{ .Release.Namespace }}.svc.cluster.local:8080
               predicates:
                 - Path=/api/vet/**
               filters:
                 - StripPrefix=2
             - id: visits-service
-              uri: http://visits-service.spring-petclinic.svc.cluster.local:8080
+              uri: http://visits-service.{{ .Release.Namespace }}.svc.cluster.local:8080
               predicates:
                 - Path=/api/visit/**
               filters:
                 - StripPrefix=2
             - id: customers-service
-              uri: http://customers-service.spring-petclinic.svc.cluster.local:8080
+              uri: http://customers-service.{{ .Release.Namespace }}.svc.cluster.local:8080
               predicates:
                 - Path=/api/customer/**
               filters:
