@@ -1,0 +1,64 @@
+apiVersion: v2
+appVersion: 2.3.1
+dependencies:
+- alias: vets-db-mysql
+  name: mysql
+  repository: '@bitnami'
+  version: 8.5.9
+- alias: visits-db-mysql
+  name: mysql
+  repository: '@bitnami'
+  version: 8.5.9
+- alias: customers-db-mysql
+  name: mysql
+  repository: '@bitnami'
+  version: 8.5.9
+- condition: somechart.enabled
+  name: prometheus
+  repository: '@prometheus-community'
+  tags:
+  - include-observability
+  version: 14.1.0
+- name: grafana
+  repository: '@grafana'
+  tags:
+  - include-observability
+  version: 6.9.0
+- name: zipkin
+  repository: '@carlosjgp'
+  tags:
+  - include-request-tracing
+  version: 0.2.0
+- name: fluent-bit
+  repository: '@fluent'
+  tags:
+  - include-log-streaming
+  version: 0.15.13
+- name: elasticsearch
+  repository: '@elastic'
+  tags:
+  - include-log-streaming
+  version: 7.13.0
+- name: kibana
+  repository: '@elastic'
+  tags:
+  - include-log-streaming
+  version: 7.13.0
+description: Spring pet clinic for Kubernetes on Platform9
+home: https://platform9-community.github.io/helm-charts/spring-petclinic-cloud
+icon: https://platform9-community.github.io/helm-charts/spring-petclinic-cloud/spring-cloud.png
+keywords:
+- spring
+- java
+- spring cloud
+- kubernetes
+- platform9
+kubeVersion: '>= 1.18.10'
+maintainers:
+- email: ddieruf@platform9.com
+  name: David Dieruf
+name: spring-petclinic-cloud
+sources:
+- https://github.com/platform9-community/spring-petclinic-cloud
+type: application
+version: 0.2.0

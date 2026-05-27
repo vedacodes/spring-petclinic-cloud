@@ -1,0 +1,119 @@
+#==================================================
+#      CHART OPTIONS (safe to change)
+#==================================================
+tags:
+  include-observability: false
+  include-log-streaming: false
+  include-request-tracing: false
+
+#==================================================
+#      DEPENDENCY CONFIGURATIONS (danger zone)
+#==================================================
+vets-db-mysql:
+  primary:
+    persistence:
+      enabled: false
+  auth:
+    database: "service_instance_db"
+  image:
+    tag: 8.0.25
+  fullnameOverride: "vets-db-mysql"
+
+visits-db-mysql:
+  primary:
+    persistence:
+      enabled: false
+  auth:
+    database: "service_instance_db"
+  image:
+    tag: 8.0.25
+  fullnameOverride: "visits-db-mysql"
+
+customers-db-mysql:
+  primary:
+    persistence:
+      enabled: false
+  auth:
+    database: "service_instance_db"
+  image:
+    tag: 8.0.25
+  fullnameOverride: "customers-db-mysql"
+
+grafana:
+  sidecar:
+    dashboards:
+      enabled: true
+    datasources:
+      enabled: true
+  rbac:
+    namespaced: true
+  fullnameOverride: "grafana"
+  persistence:
+    enabled : false
+  service:
+    type: NodePort
+    nodePort: 30300
+  env:
+    GF_SECURITY_ADMIN_USER: admin
+    GF_SECURITY_ADMIN_PASSWORD: admin
+
+prometheus:
+  server:
+    fullnameOverride : "prometheus-server"
+    persistentVolume:
+      enabled: false
+  kubeStateMetrics:
+    enabled: false
+  nodeExporter:
+    enabled: false
+  alertmanager:
+    enabled: false
+  pushgateway:
+    enabled: false
+
+fluent-bit:
+  fullnameOverride: fluentbit
+  config:
+    customParsers: ""
+
+    filters: ""
+
+    service: |
+      [SERVICE]
+        Flush 1
+        Daemon Off
+        Log_Level info
+
+    inputs: |
+      [INPUT]
+        Name stdin
+  
+    outputs: |
+      [OUTPUT]
+        Name stdout
+
+      [OUTPUT]
+        Name es
+        Host http://elasticsearch.{{ .Release.Namespace }}.svc.cluster.local:9200
+        Logstash_Format On
+        Retry_Limit False
+
+elasticsearch:
+  replicas: 1
+  fullnameOverride: elasticsearch
+  persistence:
+    enabled: false
+
+kibana:
+  fullnameOverride: kibana
+  service:
+    type: NodePort
+    port: 5601
+    nodePort: 30056
+  elasticsearchHosts: http://elasticsearch.{{ .Release.Namespace }}.svc.cluster.local:9200
+
+zipkin:
+  fullnameOverride: zipkin
+  collector:
+    service:
+      type: NodePort

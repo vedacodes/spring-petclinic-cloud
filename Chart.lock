@@ -1,0 +1,30 @@
+dependencies:
+- name: prometheus
+  repository: https://prometheus-community.github.io/helm-charts
+  version: 14.1.0
+- name: grafana
+  repository: https://grafana.github.io/helm-charts
+  version: 6.9.0
+- name: mysql
+  repository: https://charts.bitnami.com/bitnami
+  version: 8.5.9
+- name: mysql
+  repository: https://charts.bitnami.com/bitnami
+  version: 8.5.9
+- name: mysql
+  repository: https://charts.bitnami.com/bitnami
+  version: 8.5.9
+- name: fluent-bit
+  repository: https://fluent.github.io/helm-charts
+  version: 0.15.13
+- name: elasticsearch
+  repository: https://helm.elastic.co
+  version: 7.13.0
+- name: kibana
+  repository: https://helm.elastic.co
+  version: 7.13.0
+- name: zipkin
+  repository: https://carlosjgp.github.io/open-charts/
+  version: 0.2.0
+digest: sha256:cbcebd6d0a23e823bc34e75d615d0a9c1d7a030539282c78413ff4b851ae5008
+generated: "2021-06-01T13:52:04.5608888-04:00"
